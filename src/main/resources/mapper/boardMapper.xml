@@ -3,11 +3,21 @@
 <mapper namespace="com.board.mapper.BoardMapper">  
 	
 	<select id="getBoardList">
-		SELECT  BNO, MENU_ID, TITLE, CONTENT, WRITER, REGDATE, HIT
+		SELECT  BNO, MENU_ID, TITLE, WRITER, TO_CHAR(REGDATE, 'YYYY-MM-DD') REGDATE, HIT
 		FROM BOARD
+		WHERE MENU_ID = #{menu_id}
 		ORDER BY BNO DESC
 	</select>
 	
+	<insert id="insertBoard">
+		   INSERT INTO BOARD  (BNO, TITLE, WRITER, CONTENT)
+		   	    VALUES (
+		   	 (select nvl(max(bno), 0) + 1 from board),
+	         #{title},
+	         #{writer},
+	         #{content}
+	    )	
+		</insert>
 </mapper>
 
 

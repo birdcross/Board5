@@ -10,24 +10,63 @@ import org.springframework.web.servlet.ModelAndView;
 import com.board.domain.BoardVo;
 import com.board.mapper.BoardMapper;
 import com.board.menus.domain.MenuVo;
+import com.board.menus.mapper.MenuMapper;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Controller
 @RequestMapping("/Board")
 public class BoardController {
 	
 	@Autowired
 	private BoardMapper boardMapper;
+	@Autowired
+	private MenuMapper menuMapper;
 	// /Board/List?menu_id = MENU01
-	@RequestMapping("List")
+	@RequestMapping("/List")
 	public ModelAndView list(MenuVo menuVo) {
+		log.info("menuVo:{}",menuVo);
+		//메뉴목록
+		List<MenuVo> menuList = menuMapper.getMenuList();
 		
 		//게시글 목록
 		List<BoardVo> boardList = boardMapper.getBoardList(menuVo);
-		
+		System.out.println(boardList);
+
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("menuList", menuList);
 		mv.addObject("boardList", boardList);
 		mv.setViewName("board/list");
-		System.out.println(boardList);
 		return mv;
 	}
+	
+	@RequestMapping("/WriteForm")
+	public ModelAndView writeForm(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/write");	
+		return mv;
+	}
+	@RequestMapping("Write")
+	public ModelAndView write(BoardVo boardVo) {
+		boardMapper.insertBoard( boardVo );		
+		ModelAndView   mv   =  new  ModelAndView();
+		mv.setViewName("redirect:/Board/List");
+		return   mv;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
