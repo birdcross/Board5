@@ -1,5 +1,6 @@
 package com.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.board.domain.BoardVo;
 import com.board.mapper.BoardMapper;
 import com.board.menus.domain.MenuVo;
 import com.board.menus.mapper.MenuMapper;
+import com.board.user.domain.UserVo;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -63,7 +65,17 @@ public class BoardController {
 		mv.setViewName("redirect:/Board/List?menu_id=" + menu_id);
 		return   mv;
 	}
-	
+	@RequestMapping("/View")
+	public ModelAndView view(BoardVo boardVo) {
+		// user_id = ? db조회
+		HashMap<String, Object> map = boardMapper.getBoard(boardVo);
+		//System.out.println(vo);
+		log.info("vo : {}", map);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("vo", map);
+		mv.setViewName("board/view");
+		return mv; 
+	}
 }
 
 
