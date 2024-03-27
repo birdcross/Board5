@@ -11,29 +11,32 @@
 <link rel="stylesheet"  href="/css/common.css" />
 <style>
    
-   #table {      
-      width: 800px;      
-   }
-   
    #table {
+      width: 800px;
+      margin-bottom : 200px;
      td {
       text-align :center;
       padding :10px;
       
-      &:nth-of-type(1) { width : 200px; 
+      &:nth-of-type(1) { width : 150px; 
           background-color : black;
           color            : white; 
       }
-      &:nth-of-type(2) { width : 200px;  }
-      &:nth-of-type(3) { width : 200px; 
+      &:nth-of-type(2) { width : 250px;  }
+      &:nth-of-type(3) { width : 150px; 
           background-color : black;
           color            : white;
       }
-      &:nth-of-type(4) { width : 200px;  }    
+      &:nth-of-type(4) { width : 250px;  }    
+     }
+     tr:nth-of-type(3) td:nth-of-type(2){
+     	temt-align : right;
      }
     tr:nth-of-type(4) td[colspan] {
            height : 250px;
-           width  : 600px;   
+           width  : 600px;
+           text-align : left;
+           vartical-align :baseline;
     }
     tr:last-child td {
            background-color : white;
@@ -48,7 +51,7 @@
    }
 
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
   <main>
@@ -93,7 +96,7 @@
   <script>
   	const  goListEl  = document.getElementById('goList');
   	goListEl.addEventListener('click', function(e) {
-  		location.href = '/Users/List';
+  		location.href = '/Board/List';
   	})
   
   </script>

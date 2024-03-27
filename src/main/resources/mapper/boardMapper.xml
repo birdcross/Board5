@@ -9,7 +9,7 @@
 		ORDER BY BNO DESC
 	</select>
 	<select id="getBoard">
-	 SELECT BNO, MENU_ID, TITLE, CONTENT, WRITER, TO_CHAR(REGDATE, 'YYYY-MM-DD') REGDATE, HIT
+	 SELECT BNO, MENU_ID, TITLE, CONTENT, WRITER, TO_CHAR(REGDATE, 'YYYY-MM-DD HH24:MI:SS') REGDATE, HIT
 	 FROM BOARD
 	 WHERE BNO = #{bno}
 	</select>
@@ -28,6 +28,11 @@
 		    #{ writer }
 		)
 		</insert>
+		<update id="incHit">
+			UPDATE BOARD 
+			SET HIT = HIT+1
+			WHERE BNO = #{bno}
+		</update>
 </mapper>
 
 

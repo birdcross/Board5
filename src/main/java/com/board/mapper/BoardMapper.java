@@ -18,4 +18,6 @@ public interface BoardMapper {
 
 	BoardVo getBoard(BoardVo boardVo);
 
+	void incHit(BoardVo boardVo);
+
 }
