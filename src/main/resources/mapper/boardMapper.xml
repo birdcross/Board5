@@ -13,6 +13,11 @@
 	 FROM BOARD
 	 WHERE BNO = #{bno}
 	</select>
+	<select id="updateBorad">
+	 SELECT BNO, MENU_ID, TITLE, CONTENT, WRITER, TO_CHAR(REGDATE, 'YYYY-MM-DD HH24:MI:SS') REGDATE, HIT
+	 FROM BOARD
+	 WHERE BNO = #{bno}
+	</select>
 	<insert id="insertBoard" >
      INSERT INTO BOARD (
 		    BNO,
@@ -32,6 +37,15 @@
 			UPDATE BOARD 
 			SET HIT = HIT+1
 			WHERE BNO = #{bno}
+		</update>
+		<delete id="deleteBoard">
+			DELETE  FROM  BOARD
+			WHERE  BNO = #{bno}
+		</delete>
+		
+		<update id="update">
+			UPDATE BOARD 
+			SET 
 		</update>
 </mapper>
 

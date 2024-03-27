@@ -92,6 +92,33 @@ public class BoardController {
 		mv.setViewName("board/view");
 		return mv; 
 	}
+	@RequestMapping("/Delete")
+	public ModelAndView delete(BoardVo boardVo) {
+		boardMapper.deleteBoard(boardVo);
+		ModelAndView mv = new ModelAndView();
+		String menu_id = boardVo.getMenu_id();
+		mv.setViewName("redirect:/Board/List?menu_id=" + menu_id);
+		return mv;
+	}
+	@RequestMapping("/UpdateForm")
+	public ModelAndView updateform(BoardVo boardVo) {
+		//아이디로 수정할 한면의 데이터를 조회
+		BoardVo vo = boardMapper.updateBorad(boardVo);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("vo", vo);
+		mv.setViewName("/board/update");
+		return mv; 
+	}
+	
+	@RequestMapping("/Update")
+	public  ModelAndView   update( BoardVo boardVo  ) {
+		boardMapper.update( boardVo );
+		// 수정후 조회
+		ModelAndView   mv   =  new  ModelAndView();
+		String menu_id = boardVo.getMenu_id();
+		mv.setViewName("redirect:/Board/List" + menu_id);
+		return   mv;
+	}
 }
 
 

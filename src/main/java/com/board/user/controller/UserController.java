@@ -103,7 +103,7 @@ public class UserController {
 		mv.setViewName("redirect:/Users/List");
 		return   mv;
 	}
-	@RequestMapping("Delete")
+	@RequestMapping("/Delete")
 	public ModelAndView delete(UserVo userVo){
 		userMapper.deleteUser(userVo);
 		ModelAndView mv = new ModelAndView();
