@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.mapper.BoardMapper">  
-	
-	<resultMap id="getBoardMap" type="java.util.HashMap">
-	 <result property="bno" column="bno" />
-	 <result property="menu_id" column="menu_id" />
-	 <result property="title" column="title" />
-	 <result property="content" column="content" />	
-	 <result property="writer" column="writer" />
-	 <result property="regdate" column="regdate" />
-	 <result property="hit" column="hit" />
-	</resultMap>
-	
+
 	<select id="getBoardList">
 		SELECT  BNO, MENU_ID, TITLE, WRITER, TO_CHAR(REGDATE, 'YYYY-MM-DD') REGDATE, HIT
 		FROM BOARD
 		WHERE MENU_ID = #{menu_id}
 		ORDER BY BNO DESC
 	</select>
-	<select id="getBoard" resultMap = "getBoardMap">
+	<select id="getBoard">
 	 SELECT BNO, MENU_ID, TITLE, CONTENT, WRITER, TO_CHAR(REGDATE, 'YYYY-MM-DD') REGDATE, HIT
 	 FROM BOARD
 	 WHERE BNO = #{bno}

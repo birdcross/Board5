@@ -47,8 +47,13 @@ public class BoardController {
 	@RequestMapping("/WriteForm")
 	public ModelAndView writeForm(MenuVo menuVo){
 		
+		// 메뉴 목록 조회
+		List<MenuVo> mList = menuMapper.getMenuList();
+		System.out.println( "<==MenuList==>" + mList);
+		// ?menu_id=MENU01에서 넘어온 meenu_id 를처리
 		String menu_id = menuVo.getMenu_id();
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("menuList", mList);
 		mv.addObject("menu_id", menu_id);
 		mv.setViewName("board/write");	
 		return mv;
@@ -67,12 +72,13 @@ public class BoardController {
 	}
 	@RequestMapping("/View")
 	public ModelAndView view(BoardVo boardVo) {
-		// user_id = ? db조회
-		HashMap<String, Object> map = boardMapper.getBoard(boardVo);
-		//System.out.println(vo);
-		log.info("vo : {}", map);
+		//메뉴목록 조회
+		List<MenuVo> menuList = menuMapper.getMenuList();
+		// bno로 조회한 게시글 정보
+		BoardVo vo = boardMapper.getBoard(boardVo);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("vo", map);
+		mv.addObject("menuList", menuList);
+		mv.addObject("vo", vo);
 		mv.setViewName("board/view");
 		return mv; 
 	}

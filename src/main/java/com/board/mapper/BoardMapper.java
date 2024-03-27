@@ -16,6 +16,6 @@ public interface BoardMapper {
 
 	void insertBoard(BoardVo boardVo);
 
-	HashMap<String, Object> getBoard(BoardVo boardVo);
+	BoardVo getBoard(BoardVo boardVo);
 
 }
