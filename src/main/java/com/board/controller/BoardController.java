@@ -32,27 +32,38 @@ public class BoardController {
 		//게시글 목록
 		List<BoardVo> boardList = boardMapper.getBoardList(menuVo);
 		System.out.println(boardList);
-
+		
+		String menu_id = menuVo.getMenu_id();
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("menu_id", menu_id);
 		mv.addObject("menuList", menuList);
 		mv.addObject("boardList", boardList);
 		mv.setViewName("board/list");
 		return mv;
 	}
-	
+	// /Board/WriteForm?menu_id=MENU01
 	@RequestMapping("/WriteForm")
-	public ModelAndView writeForm(){
+	public ModelAndView writeForm(MenuVo menuVo){
+		
+		String menu_id = menuVo.getMenu_id();
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("menu_id", menu_id);
 		mv.setViewName("board/write");	
 		return mv;
 	}
-	@RequestMapping("Write")
-	public ModelAndView write(BoardVo boardVo) {
-		boardMapper.insertBoard( boardVo );		
+	// /Board/Write
+	// menu_id =MENU01, title = 입력값, writer = 입력값, content = 입력값
+	@RequestMapping("/Write")
+	public ModelAndView write(BoardVo boardVo){
+		// 넘어온 값 Board저장
+		boardMapper.insertBoard( boardVo );
+		
+		String menu_id = boardVo.getMenu_id();
 		ModelAndView   mv   =  new  ModelAndView();
-		mv.setViewName("redirect:/Board/List");
+		mv.setViewName("redirect:/Board/List?menu_id=" + menu_id);
 		return   mv;
 	}
+	
 }
 
 

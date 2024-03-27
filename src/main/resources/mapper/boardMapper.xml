@@ -10,13 +10,19 @@
 	</select>
 	
 	<insert id="insertBoard">
-		   INSERT INTO BOARD  (BNO, TITLE, WRITER, CONTENT)
-		   	    VALUES (
-		   	 (select nvl(max(bno), 0) + 1 from board),
-	         #{title},
-	         #{writer},
-	         #{content}
-	    )	
+     INSERT INTO BOARD (
+		    BNO,
+		    MENU_ID,
+		    TITLE,
+		    CONTENT,
+		    WRITER
+		) VALUES (
+		    ( SELECT  NVL(MAX(BNO), 0)+1 FROM  BOARD  ),
+		    #{ menu_id },
+		    #{ title   },
+		    #{ content },
+		    #{ writer }
+		)
 		</insert>
 </mapper>
 
