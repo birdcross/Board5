@@ -45,7 +45,14 @@
 		
 		<update id="update">
 			UPDATE BOARD 
-			SET 
+			SET BNO = #{bno},
+				MENU_ID = #{menu_id},
+				TITLE = #{title},
+				CONTENT = #{content},
+				WRITER = #{writer},
+				REGDATE = #{regdate},
+				HIT = #{hit}
+			WHERE BNO = #{bno}
 		</update>
 </mapper>
 

@@ -30,6 +30,10 @@
    input[readonly] {
       background: #EEE;
    }
+   textarea{
+      height : 300px;
+      width : 100%;	
+   }
 
 </style>
 </head>
@@ -49,7 +53,7 @@
 	 </tr>
 	 <tr>
 	   <td>내용</td>
-	   <td><textarea name = "content"></textarea></td>
+	   <td><textarea name = "content">${vo.content}</textarea></td>
 	 </tr>
 	 <tr>
 	   <td colspan="2">
