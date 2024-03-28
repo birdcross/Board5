@@ -104,21 +104,22 @@ public class BoardController {
 	}
 	@RequestMapping("/UpdateForm")
 	public ModelAndView updateform(BoardVo boardVo) {
-		//아이디로 수정할 한면의 데이터를 조회
-		BoardVo vo = boardMapper.updateBorad(boardVo);
+		BoardVo vo = boardMapper.getBoard(boardVo);
+		List<MenuVo> menuList = menuMapper.getMenuList();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("vo", vo);
-		mv.setViewName("/board/update");
+		mv.addObject("menuList", menuList);
+		mv.setViewName("board/update"); //update.jsp
 		return mv; 
 	}
-	
+	//  /Board/Update
 	@RequestMapping("/Update")
 	public  ModelAndView   update( BoardVo boardVo  ) {
 		boardMapper.update( boardVo );
 		// 수정후 조회
-		ModelAndView   mv   =  new  ModelAndView();
 		String menu_id = boardVo.getMenu_id();
-		mv.setViewName("redirect:/Board/List" + menu_id);
+		ModelAndView   mv   =  new  ModelAndView();
+		mv.setViewName("redirect:/Board/List?menu_id=" + menu_id);
 		return   mv;
 	}
 }

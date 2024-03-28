@@ -22,9 +22,8 @@ public interface BoardMapper {
 
 	void deleteBoard(BoardVo boardVo);
 
-	BoardVo updateBorad(BoardVo boardVo);
-
 	void update(BoardVo boardVo);
+
 
 
 
